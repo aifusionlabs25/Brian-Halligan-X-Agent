@@ -46,6 +46,7 @@ const zoomMeetingCreate = read("src/lib/hal/zoomMeetingCreate.ts");
 assert.match(zoomMeetingCreate, /zoom_oauth_token_requested:\s*false/);
 assert.match(zoomMeetingCreate, /live_zoom_called:\s*false/);
 assert.match(zoomMeetingCreate, /zoom_meeting_created:\s*false/);
+assert.match(zoomMeetingCreate, /zoom_reason/);
 assert.match(zoomMeetingCreate, /CREATE_ZOOM_MEETING/);
 assert.match(zoomMeetingCreate, /HAL_ZOOM_LIVE_CREATE_KILL_SWITCH=false/);
 assert.doesNotMatch(zoomMeetingCreate, /ZOOM_CLIENT_SECRET=.*[A-Za-z0-9]{8}/);

@@ -223,10 +223,17 @@ export async function createZoomMeetingLiveGated(input: ZoomMeetingCreateInput =
       zoom_meeting_create_live_version: "hal_zoom_meeting_create_live_v1",
       status: "zoom_token_request_failed",
       http_status: tokenResponse.status,
+      zoom_error: typeof tokenJson.error === "string" ? tokenJson.error : undefined,
+      zoom_reason: typeof tokenJson.reason === "string" ? tokenJson.reason : undefined,
       zoom_oauth_token_requested: true,
       live_zoom_called: true,
       zoom_meeting_created: false,
-      error: typeof tokenJson.message === "string" ? tokenJson.message : "Zoom token request failed",
+      error:
+        typeof tokenJson.reason === "string"
+          ? tokenJson.reason
+          : typeof tokenJson.message === "string"
+            ? tokenJson.message
+            : "Zoom token request failed",
       ...HAL_BOUNDARY_FLAGS,
       outbound_action_taken: false,
       action_claim_allowed: false,
