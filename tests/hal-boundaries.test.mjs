@@ -66,5 +66,24 @@ assert.match(zoomDoc, /Do not use the `me` shortcut/);
 
 const envExample = read(".env.example");
 assert.match(envExample, /ZOOM_USER_ID=\s*$/m);
+assert.match(envExample, /HAL_ZOOM_RETURN_SDK_JWT=false/);
+
+const zoomJoin = read("src/lib/hal/zoomMeetingJoin.ts");
+assert.match(zoomJoin, /zoom_meeting_joined:\s*false/);
+assert.match(zoomJoin, /zoom_audio_connected:\s*false/);
+assert.match(zoomJoin, /tavus_media_bridge_started:\s*false/);
+assert.match(zoomJoin, /RETURN_ZOOM_SDK_JWT/);
+assert.match(zoomJoin, /createHmac/);
+
+const zoomJoinRoute = read("src/app/api/hal/zoom/meeting/join-preview/route.ts");
+assert.match(zoomJoinRoute, /buildHalZoomMeetingJoinPreview/);
+
+const zoomSdkJwtRoute = read("src/app/api/hal/zoom/meeting/sdk-jwt/route.ts");
+assert.match(zoomSdkJwtRoute, /buildHalZoomMeetingSdkJwtResponse/);
+
+const zoomJoinDoc = read("HAL_ZOOM_JOIN_SIDECAR.md");
+assert.match(zoomJoinDoc, /Meeting SDK JWT/);
+assert.match(zoomJoinDoc, /It still does not join a meeting by itself/);
+assert.match(zoomJoinDoc, /HAL_ZOOM_RETURN_SDK_JWT=false/);
 
 console.log("hal-boundaries: ok");

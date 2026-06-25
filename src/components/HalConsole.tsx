@@ -12,6 +12,7 @@ import {
   RadioTower,
   RotateCcw,
   ShieldCheck,
+  Video,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import type { HalTranscriptAnalysis } from "@/lib/hal/transcriptAnalysis";
@@ -44,6 +45,11 @@ const operations = [
     label: "Schedule",
     endpoint: "/api/hal/zoom/meeting/create-preview",
     icon: CalendarPlus,
+  },
+  {
+    label: "Join",
+    endpoint: "/api/hal/zoom/meeting/join-preview",
+    icon: Video,
   },
   {
     label: "Session",
@@ -83,6 +89,8 @@ function summarizeResult(result: ApiResult) {
     "external_meeting_joined",
     "media_bridge_started",
     "zoom_meeting_created",
+    "zoom_meeting_joined",
+    "zoom_meeting_sdk_jwt_generated",
     "outbound_action_taken",
     "production_database_mutated",
     "action_claim_allowed",
@@ -160,6 +168,11 @@ export function HalConsole({
           duration_minutes: 30,
           timezone: "America/Phoenix",
           invite_sending_authorized: false,
+          meeting_number: "123456789",
+          meeting_password: "not-used-in-preview",
+          display_name: "Hal (AI)",
+          role: 0,
+          meeting_owned_by_developer_account: true,
         }),
       });
       const json = (await response.json()) as Record<string, unknown>;
@@ -294,6 +307,8 @@ export function HalConsole({
                 <BooleanLine label="External Meeting" value={result?.external_meeting_joined === true} />
                 <BooleanLine label="Media Bridge" value={result?.media_bridge_started === true} />
                 <BooleanLine label="Zoom Created" value={result?.zoom_meeting_created === true} />
+                <BooleanLine label="Zoom Joined" value={result?.zoom_meeting_joined === true} />
+                <BooleanLine label="SDK JWT" value={result?.zoom_meeting_sdk_jwt_generated === true} />
                 <BooleanLine label="Outbound Action" value={result?.outbound_action_taken === true} />
                 <BooleanLine label="Production DB" value={result?.production_database_mutated === true} />
                 <BooleanLine label="Claim Action Done" value={result?.action_claim_allowed === true} />
