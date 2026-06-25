@@ -26,4 +26,20 @@ const transcript = read("HAL_VIDEO_TRANSCRIPT_ANALYSIS.md");
 assert.match(transcript, /concise memory-backed chief of staff/);
 assert.match(transcript, /clone framing/i);
 
+const meetingTransport = read("src/lib/hal/meetingTransport.ts");
+assert.match(meetingTransport, /live_zoom_called:\s*false/);
+assert.match(meetingTransport, /live_teams_called:\s*false/);
+assert.match(meetingTransport, /external_meeting_joined:\s*false/);
+assert.match(meetingTransport, /media_bridge_started:\s*false/);
+assert.match(meetingTransport, /external meeting transport adapter with media bridge/);
+assert.match(meetingTransport, /Hal \(AI\)/);
+
+const meetingRoute = read("src/app/api/hal/meeting-transport/preview/route.ts");
+assert.match(meetingRoute, /buildHalMeetingTransportPreview/);
+
+const sidecarDoc = read("HAL_MEETING_TRANSPORT_SIDECAR.md");
+assert.match(sidecarDoc, /Zoom or Microsoft Teams meetings/);
+assert.match(sidecarDoc, /Unsafe claim today/);
+assert.match(sidecarDoc, /does not yet join external meetings/);
+
 console.log("hal-boundaries: ok");

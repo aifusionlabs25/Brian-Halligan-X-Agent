@@ -35,6 +35,11 @@ const operations = [
     icon: BrainCircuit,
   },
   {
+    label: "Meeting",
+    endpoint: "/api/hal/meeting-transport/preview",
+    icon: RadioTower,
+  },
+  {
     label: "Session",
     endpoint: "/api/hal/session-completed/dry-run",
     icon: ClipboardCheck,
@@ -69,6 +74,8 @@ function summarizeResult(result: ApiResult) {
     "dry_run_only",
     "live_tavus_called",
     "live_hermes_called",
+    "external_meeting_joined",
+    "media_bridge_started",
     "outbound_action_taken",
     "production_database_mutated",
     "action_claim_allowed",
@@ -135,6 +142,12 @@ export function HalConsole({
         body: JSON.stringify({
           source_mode: "public_plus_approved_kb_pending",
           demo_scenario: "hal_video_persona_review",
+          meeting_url: "https://zoom.us/j/123456789",
+          meeting_title: "Long Strange Trip guest planning",
+          host_authorized: true,
+          visible_ai_disclosure: true,
+          principal: "Brian Halligan",
+          deployment_profile: "PUBLIC_DEMO",
         }),
       });
       const json = (await response.json()) as Record<string, unknown>;
@@ -266,6 +279,8 @@ export function HalConsole({
               <div className="space-y-1 font-mono text-sm">
                 <BooleanLine label="Live Tavus" value={result?.live_tavus_called === true} />
                 <BooleanLine label="Live Hermes" value={result?.live_hermes_called === true} />
+                <BooleanLine label="External Meeting" value={result?.external_meeting_joined === true} />
+                <BooleanLine label="Media Bridge" value={result?.media_bridge_started === true} />
                 <BooleanLine label="Outbound Action" value={result?.outbound_action_taken === true} />
                 <BooleanLine label="Production DB" value={result?.production_database_mutated === true} />
                 <BooleanLine label="Claim Action Done" value={result?.action_claim_allowed === true} />

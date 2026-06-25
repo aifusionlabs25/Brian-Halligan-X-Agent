@@ -33,6 +33,7 @@ Do not commit live API keys, callback tokens, persona secrets, or private KB lin
 
 - `POST /api/hal/conversation/start-preview`
 - `POST /api/hal/context/preview`
+- `POST /api/hal/meeting-transport/preview`
 - `POST /api/hal/session-completed/dry-run`
 - `POST /api/hal/operator-review/dry-run`
 
@@ -43,6 +44,10 @@ All routes are designed to return safe boundary booleans:
 - `outbound_action_taken=false`
 - `production_database_mutated=false`
 - `action_claim_allowed=false`
+
+## Meeting Transport Sidecar
+
+`HAL_MEETING_TRANSPORT_SIDECAR.md` defines the side project for Zoom/Teams meeting join. The current route is a dry-run planner only; it detects the meeting platform, returns the required adapter lane, and proves no external meeting bot or media bridge was called.
 
 ## Validation
 
@@ -60,4 +65,3 @@ npm run build
 - `HAL_SYSTEM_PROMPT_DRAFT.md`
 - `HAL_VIDEO_TRANSCRIPT_ANALYSIS.md`
 - `HAL_DANI_REFERENCE_ARCHITECTURE.md`
-
