@@ -39,7 +39,7 @@ Required credentials, stored only in `.env.local` or deployment secrets:
 ZOOM_ACCOUNT_ID=
 ZOOM_CLIENT_ID=
 ZOOM_CLIENT_SECRET=
-ZOOM_USER_ID=me
+ZOOM_USER_ID=
 ```
 
 Live gates:
@@ -66,6 +66,8 @@ The live route also requires this request field:
   "confirm_live_zoom_create": "CREATE_ZOOM_MEETING"
 }
 ```
+
+For a Server-to-Server OAuth app, `ZOOM_USER_ID` should be the Zoom user ID or email address whose account will own the meeting. Do not use the `me` shortcut for this app type.
 
 ## Local Routes
 

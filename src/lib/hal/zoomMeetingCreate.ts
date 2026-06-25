@@ -49,7 +49,7 @@ function readZoomMeetingCreateConfig() {
   const accountId = env("ZOOM_ACCOUNT_ID");
   const clientId = env("ZOOM_CLIENT_ID");
   const clientSecret = env("ZOOM_CLIENT_SECRET");
-  const userId = env("ZOOM_USER_ID") || "me";
+  const userId = env("ZOOM_USER_ID");
   const liveEnabled = env("HAL_ZOOM_LIVE_CREATE_ENABLED") === "true";
   const killSwitchOpen = env("HAL_ZOOM_LIVE_CREATE_KILL_SWITCH") === "false";
   const mode = env("HAL_ZOOM_MEETING_CREATE_MODE") || "dry-run";
@@ -69,7 +69,7 @@ function readZoomMeetingCreateConfig() {
       !clientSecret ? "ZOOM_CLIENT_SECRET" : "",
       !userId ? "ZOOM_USER_ID" : "",
     ].filter(Boolean),
-    user_id: userId,
+    user_id: userId || "<ZOOM_USER_ID>",
     account_id: accountId,
     client_id: clientId,
     client_secret: clientSecret,

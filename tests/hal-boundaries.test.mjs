@@ -61,5 +61,9 @@ const zoomDoc = read("HAL_ZOOM_MEETING_CREATE_SIDECAR.md");
 assert.match(zoomDoc, /dry-run adapter with live gate/);
 assert.match(zoomDoc, /Unsafe until a gated live test passes/);
 assert.match(zoomDoc, /ZOOM_CLIENT_SECRET=/);
+assert.match(zoomDoc, /Do not use the `me` shortcut/);
+
+const envExample = read(".env.example");
+assert.match(envExample, /ZOOM_USER_ID=\s*$/m);
 
 console.log("hal-boundaries: ok");
