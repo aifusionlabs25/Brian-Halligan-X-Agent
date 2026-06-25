@@ -12,7 +12,7 @@ import {
   RotateCcw,
   ShieldCheck,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { HalTranscriptAnalysis } from "@/lib/hal/transcriptAnalysis";
 
 type PreviewState = {
@@ -86,6 +86,12 @@ export function HalConsole({
   const [result, setResult] = useState<ApiResult>(null);
   const [active, setActive] = useState<string>("none");
   const [loading, setLoading] = useState(false);
+  const [clientReady, setClientReady] = useState(false);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setClientReady(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const statusRows = useMemo<PreviewState[]>(
     () => [
@@ -167,7 +173,10 @@ export function HalConsole({
           </div>
         </div>
 
-        <div className="flex min-h-screen flex-col bg-[linear-gradient(135deg,#111312_0%,#1a201d_54%,#101211_100%)]">
+        <div
+          className="flex min-h-screen flex-col bg-[linear-gradient(135deg,#111312_0%,#1a201d_54%,#101211_100%)]"
+          data-client-ready={clientReady ? "true" : "false"}
+        >
           <header className="border-b border-white/10 px-5 py-4 sm:px-7">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
@@ -218,6 +227,7 @@ export function HalConsole({
                         key={operation.label}
                         type="button"
                         onClick={() => runPreview(operation.endpoint, operation.label)}
+                        disabled={!clientReady || loading}
                         className="flex min-h-24 flex-col justify-between border border-white/10 bg-white/[0.045] p-4 text-left transition-colors hover:border-[#c5a56c]/55 hover:bg-[#c5a56c]/10"
                       >
                         <Icon size={20} className="text-[#d4b16f]" />
