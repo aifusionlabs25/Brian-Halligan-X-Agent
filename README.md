@@ -34,6 +34,8 @@ Do not commit live API keys, callback tokens, persona secrets, or private KB lin
 - `POST /api/hal/conversation/start-preview`
 - `POST /api/hal/context/preview`
 - `POST /api/hal/meeting-transport/preview`
+- `POST /api/hal/zoom/meeting/create-preview`
+- `POST /api/hal/zoom/meeting/create-live`
 - `POST /api/hal/session-completed/dry-run`
 - `POST /api/hal/operator-review/dry-run`
 
@@ -48,6 +50,8 @@ All routes are designed to return safe boundary booleans:
 ## Meeting Transport Sidecar
 
 `HAL_MEETING_TRANSPORT_SIDECAR.md` defines the side project for Zoom/Teams meeting join. The current route is a dry-run planner only; it detects the meeting platform, returns the required adapter lane, and proves no external meeting bot or media bridge was called.
+
+`HAL_ZOOM_MEETING_CREATE_SIDECAR.md` defines the easier scheduling lane. The preview route builds the Zoom create-meeting request without calling Zoom. The live route is blocked unless Zoom Server-to-Server OAuth credentials, live env gates, host authorization, and the `CREATE_ZOOM_MEETING` confirmation phrase are all present.
 
 ## Validation
 

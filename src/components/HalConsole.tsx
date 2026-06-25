@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {
   BrainCircuit,
+  CalendarPlus,
   CheckCircle2,
   ClipboardCheck,
   FileSearch,
@@ -38,6 +39,11 @@ const operations = [
     label: "Meeting",
     endpoint: "/api/hal/meeting-transport/preview",
     icon: RadioTower,
+  },
+  {
+    label: "Schedule",
+    endpoint: "/api/hal/zoom/meeting/create-preview",
+    icon: CalendarPlus,
   },
   {
     label: "Session",
@@ -76,6 +82,7 @@ function summarizeResult(result: ApiResult) {
     "live_hermes_called",
     "external_meeting_joined",
     "media_bridge_started",
+    "zoom_meeting_created",
     "outbound_action_taken",
     "production_database_mutated",
     "action_claim_allowed",
@@ -148,6 +155,11 @@ export function HalConsole({
           visible_ai_disclosure: true,
           principal: "Brian Halligan",
           deployment_profile: "PUBLIC_DEMO",
+          topic: "Hal working session",
+          agenda: "Pressure-test Hal meeting workflow and next proof step.",
+          duration_minutes: 30,
+          timezone: "America/Phoenix",
+          invite_sending_authorized: false,
         }),
       });
       const json = (await response.json()) as Record<string, unknown>;
@@ -281,6 +293,7 @@ export function HalConsole({
                 <BooleanLine label="Live Hermes" value={result?.live_hermes_called === true} />
                 <BooleanLine label="External Meeting" value={result?.external_meeting_joined === true} />
                 <BooleanLine label="Media Bridge" value={result?.media_bridge_started === true} />
+                <BooleanLine label="Zoom Created" value={result?.zoom_meeting_created === true} />
                 <BooleanLine label="Outbound Action" value={result?.outbound_action_taken === true} />
                 <BooleanLine label="Production DB" value={result?.production_database_mutated === true} />
                 <BooleanLine label="Claim Action Done" value={result?.action_claim_allowed === true} />
