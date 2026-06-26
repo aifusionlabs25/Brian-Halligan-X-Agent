@@ -31,6 +31,10 @@ function asText(value: unknown, fallback = "") {
   return typeof value === "string" && value.trim() ? value.trim() : fallback;
 }
 
+function normalizeMeetingNumber(value: unknown) {
+  return asText(value).replace(/\D/g, "");
+}
+
 function asBool(value: unknown) {
   return value === true || value === "true";
 }
@@ -105,7 +109,7 @@ export function buildZoomMeetingSdkJwt({
 
 export function buildHalZoomMeetingJoinPreview(input: ZoomMeetingJoinInput = {}) {
   const config = readZoomMeetingSdkConfig();
-  const meetingNumber = asText(input.meeting_number);
+  const meetingNumber = normalizeMeetingNumber(input.meeting_number);
   const role = asRole(input.role);
   const hostAuthorized = asBool(input.host_authorized);
   const visibleDisclosure = asBool(input.visible_ai_disclosure);
@@ -163,7 +167,7 @@ export function buildHalZoomMeetingJoinPreview(input: ZoomMeetingJoinInput = {})
 
 export function buildHalZoomMeetingSdkJwtResponse(input: ZoomMeetingJoinInput = {}) {
   const config = readZoomMeetingSdkConfig();
-  const meetingNumber = asText(input.meeting_number);
+  const meetingNumber = normalizeMeetingNumber(input.meeting_number);
   const role = asRole(input.role);
   const closed = [
     config.mode !== "live" ? "HAL_ZOOM_JOIN_MODE=live" : "",

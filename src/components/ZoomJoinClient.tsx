@@ -55,11 +55,12 @@ export function ZoomJoinClient() {
   );
 
   async function requestSdkJwt() {
+    const normalizedMeetingNumber = meetingNumber.replace(/\D/g, "");
     const response = await fetch("/api/hal/zoom/meeting/sdk-jwt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        meeting_number: meetingNumber.trim(),
+        meeting_number: normalizedMeetingNumber,
         role: 0,
         confirm_return_sdk_jwt: returnJwtConfirmed ? "RETURN_ZOOM_SDK_JWT" : "",
       }),
@@ -104,7 +105,7 @@ export function ZoomJoinClient() {
       await client.join({
         sdkKey: token.sdk_client_id,
         signature: token.sdk_jwt,
-        meetingNumber: meetingNumber.trim(),
+        meetingNumber: meetingNumber.replace(/\D/g, ""),
         password: password.trim(),
         userName: userName.trim() || defaultUserName,
       });

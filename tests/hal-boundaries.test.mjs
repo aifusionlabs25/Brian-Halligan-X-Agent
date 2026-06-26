@@ -75,6 +75,7 @@ assert.match(zoomJoin, /tavus_media_bridge_started:\s*false/);
 assert.match(zoomJoin, /RETURN_ZOOM_SDK_JWT/);
 assert.match(zoomJoin, /createHmac/);
 assert.match(zoomJoin, /ZOOM_MEETING_SDK_CDN/);
+assert.match(zoomJoin, /replace\(\/\\D\/g, ""\)/);
 
 const zoomJoinRoute = read("src/app/api/hal/zoom/meeting/join-preview/route.ts");
 assert.match(zoomJoinRoute, /buildHalZoomMeetingJoinPreview/);
@@ -92,6 +93,7 @@ assert.match(zoomJoinClient, /Hal \(AI\)/);
 assert.match(zoomJoinClient, /zoomus-websdk-embedded/);
 assert.match(zoomJoinClient, /Check Token Gate/);
 assert.match(zoomJoinClient, /Join Controlled Zoom/);
+assert.match(zoomJoinClient, /replace\(\/\\D\/g, ""\)/);
 
 const zoomJoinPage = read("src/app/zoom/join/page.tsx");
 assert.match(zoomJoinPage, /ZoomJoinClient/);
