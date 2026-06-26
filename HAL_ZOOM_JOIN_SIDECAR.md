@@ -101,6 +101,20 @@ The future Zoom client needs:
 - a visible disclosure script;
 - media bridge plan for Tavus voice/video.
 
+The local join client is:
+
+```text
+http://127.0.0.1:3001/zoom/join
+```
+
+For a controlled local join attempt, temporarily set:
+
+```text
+HAL_ZOOM_RETURN_SDK_JWT=true
+```
+
+Then enter a test meeting number and passcode on the local page. Turn the flag back to `false` after the test.
+
 ## What Still Remains
 
 After the SDK JWT is generated, the next implementation step is a Zoom Meeting SDK client page or native worker that:

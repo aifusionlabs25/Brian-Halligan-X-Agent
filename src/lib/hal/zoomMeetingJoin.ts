@@ -201,6 +201,7 @@ export function buildHalZoomMeetingSdkJwtResponse(input: ZoomMeetingJoinInput = 
     expires_at_epoch_seconds: signed.expires_at_epoch_seconds,
     zoom_meeting_sdk_jwt_generated: true,
     zoom_meeting_sdk_jwt_returned: mayReturnJwt,
+    sdk_client_id: mayReturnJwt ? config.client_id : undefined,
     sdk_jwt: mayReturnJwt ? signed.jwt : undefined,
     ...HAL_BOUNDARY_FLAGS,
     live_zoom_called: false,
@@ -208,3 +209,5 @@ export function buildHalZoomMeetingSdkJwtResponse(input: ZoomMeetingJoinInput = 
     action_claim_allowed: false,
   };
 }
+
+export const ZOOM_MEETING_SDK_CDN = "https://source.zoom.us/6.2.0/zoomus-websdk-embedded.umd.min.js";

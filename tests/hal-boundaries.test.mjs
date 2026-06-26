@@ -74,6 +74,7 @@ assert.match(zoomJoin, /zoom_audio_connected:\s*false/);
 assert.match(zoomJoin, /tavus_media_bridge_started:\s*false/);
 assert.match(zoomJoin, /RETURN_ZOOM_SDK_JWT/);
 assert.match(zoomJoin, /createHmac/);
+assert.match(zoomJoin, /ZOOM_MEETING_SDK_CDN/);
 
 const zoomJoinRoute = read("src/app/api/hal/zoom/meeting/join-preview/route.ts");
 assert.match(zoomJoinRoute, /buildHalZoomMeetingJoinPreview/);
@@ -85,5 +86,14 @@ const zoomJoinDoc = read("HAL_ZOOM_JOIN_SIDECAR.md");
 assert.match(zoomJoinDoc, /Meeting SDK JWT/);
 assert.match(zoomJoinDoc, /It still does not join a meeting by itself/);
 assert.match(zoomJoinDoc, /HAL_ZOOM_RETURN_SDK_JWT=false/);
+
+const zoomJoinClient = read("src/components/ZoomJoinClient.tsx");
+assert.match(zoomJoinClient, /Hal \(AI\)/);
+assert.match(zoomJoinClient, /zoomus-websdk-embedded/);
+assert.match(zoomJoinClient, /Check Token Gate/);
+assert.match(zoomJoinClient, /Join Controlled Zoom/);
+
+const zoomJoinPage = read("src/app/zoom/join/page.tsx");
+assert.match(zoomJoinPage, /ZoomJoinClient/);
 
 console.log("hal-boundaries: ok");

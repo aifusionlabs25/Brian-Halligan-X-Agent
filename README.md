@@ -57,6 +57,14 @@ All routes are designed to return safe boundary booleans:
 
 `HAL_ZOOM_JOIN_SIDECAR.md` defines the next join lane. The preview route explains whether Zoom Meeting SDK credentials are ready. The SDK JWT route signs a local Meeting SDK JWT only when join gates are open; it does not join a meeting by itself.
 
+Local Zoom join test page:
+
+```text
+http://127.0.0.1:3001/zoom/join
+```
+
+Keep `HAL_ZOOM_RETURN_SDK_JWT=false` except during a controlled local SDK join test.
+
 ## Validation
 
 ```powershell
